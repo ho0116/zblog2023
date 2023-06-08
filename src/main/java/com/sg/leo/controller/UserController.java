@@ -23,44 +23,52 @@ import com.sg.leo.service.UserService;
 public class UserController {
 	@Autowired
 	private UserRepository userRepository;
-	
+
 //	@PostMapping("/user")
 //	public @ResponseBody String insertUser(@RequestBody User user) {
 //		user.setRole(RoleType.USER);
 //		userRepository.save(user);
 //		return user.getUsername() + "님 회원가입성공";
 //	}
-	
+
 	@GetMapping("/user/get/{id}")
 	public @ResponseBody User getUer(@PathVariable int id) {
-		User findUser = userRepository.findById(id).orElseThrow(()->{
+		User findUser = userRepository.findById(id).orElseThrow(() -> {
 			return new ZblogException(id + "회원없음");
 		});
 		return findUser;
 	}
-	
+
 	@DeleteMapping("/user/{id}")
 	public @ResponseBody String deleteUser(@PathVariable int id) {
 		userRepository.deleteById(id);
 		return id + "번 회원삭제 성공";
 	}
-	
+
 	@GetMapping("/user/list")
-	public @ResponseBody List<User> getUserList(){
+	public @ResponseBody List<User> getUserList() {
 		return userRepository.findAll();
 	}
-	
+
 	@GetMapping("/auth/insertUser")
 	public String insertUser() {
 		return "user/insertUser";
 	}
-	
+
 	@Autowired
 	private UserService userService;
-	
+
 	@PostMapping("/auth/insertUser")
-	public @ResponseBody ResponseDTO<?> insertUser(@RequestBody User user){
-		userService.insertUser(user);
-		return new ResponseDTO<>(HttpStatus.OK.value(), user.getUsername() + "님 회원가입 성공했어요");
+	public @ResponseBody ResponseDTO<?> insertUser(@RequestBody User user) {
+
+		User findUser = userService.getUser(user.getUsername());
+
+		if (findUser.getUsername() == null) {
+			userService.insertUser(user);
+			return new ResponseDTO<>(HttpStatus.OK.value(), user.getUsername() + "님 회원가입 성공했어요");
+		} else {
+			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), user.getUsername() + "님 이미 회원임 또는 username 사용중");
+
+		}
 	}
 }

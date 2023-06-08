@@ -4,9 +4,7 @@
 <br>
 <div class="mt-5 p-4 text-center">
 	<p>Created by AI department</p>
-	<p>연락처 031-740-1371 신구대 AI과</p>
+	<p>연락처 031-740-1371 엄선호 신구대 AI과</p>
 </div>
-
 </body>
-
 </html>
