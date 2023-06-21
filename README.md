@@ -1,4 +1,10 @@
+![header](https://capsule-render.vercel.app/api?type=waving&color=AED6F1&height=300&section=header&section=right&text=Spring%20Framework&fontSize=60&fontColor=333333)
+
+
 # 회원기반 게시판 관리 웹
+
+회원 가입을 통해 계정을 생성하고, 로그인하여 게시글을 작성할 수 있다.  또한 게시물의 내용도 볼 수 있는 웹페이지를 만들었다. 
+
 
 ### 개발도구
 #### Front
